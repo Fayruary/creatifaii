@@ -164,7 +164,7 @@ function About() {
             ></textarea>
             <button
               type="submit"
-              className="mt-2 bg-white hover:bg-gray-200 text-black font-semibold px-6 py-3 rounded-full transition"
+              className="mt-2 bg-green-200 hover:bg-gray-200 text-black font-semibold px-6 py-3 rounded-full transition"
             >
               Send Message
             </button>
