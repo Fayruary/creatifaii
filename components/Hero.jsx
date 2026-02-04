@@ -4,6 +4,9 @@ import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNode, FaGithub} from 'react-icons/fa';
+import { SiTailwindcss, SiNextdotjs, SiMysql, } from 'react-icons/si';
+import { BiLinkExternal } from 'react-icons/bi';
 
 export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,13 +14,48 @@ export default function Hero() {
   const handleMenuToggle = useCallback(() => setIsMenuOpen(prev => !prev), []);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
-  const skills = [
-    { name: 'HTML & CSS', level: 'Advanced' },
-    { name: 'JavaScript', level: 'Advanced' },
-    { name: 'React & Next.js', level: 'Advanced' },
-    { name: 'Tailwind CSS', level: 'Advanced' },
-    { name: 'Node.js & Express', level: 'Intermediate' },
-    { name: 'UI/UX Design', level: 'Advanced' },
+ const skills = [
+  { icon: <FaHtml5 className="text-orange-500 w-8 h-8" />, level: 'Advanced' },
+  { icon: <FaCss3Alt className="text-blue-500 w-8 h-8" />, level: 'Advanced' },
+  { icon: <FaJs className="text-yellow-400 w-8 h-8" />, level: 'Advanced' },
+  { icon: <FaReact className="text-blue-400 w-8 h-8" />, level: 'Advanced' },
+  { icon: <SiNextdotjs className="text-white w-8 h-8" />, level: 'Advanced' },
+  { icon: <SiTailwindcss className="text-sky-400 w-8 h-8" />, level: 'Advanced' },
+  { icon: <FaNode className="text-green-500 w-8 h-8" />, level: 'Intermediate' },
+  { icon: <SiMysql className="text-blue-700 w-8 h-8" />, level: 'Advanced' },
+];
+
+
+  const projects = [
+    { 
+      src: '/images/website-perpus.png', 
+      alt: 'Project 1', 
+      live: 'https://perpus-iota.vercel.app/', 
+      github: 'https://github.com/Fayruary/perpustakaan-sederhana', 
+      span: 'sm:col-span-2 lg:col-span-2', 
+      aspect: 'aspect-[16/9]' 
+    },
+    { 
+      src: '/images/lp.png', 
+      alt: 'Project 2', 
+      live: 'https://landingpage.vercel.app', 
+      github: 'https://github.com/Fayruary/Tugas-AAS-React-Vite', 
+      aspect: 'aspect-[4/3]' 
+    },
+    { 
+      src: '/images/nime2.png', 
+      alt: 'Project 3', 
+      live: 'https://nime-fayz.vercel.app', 
+      github: 'https://github.com/username/nime-fayz', 
+      span: 'sm:col-span-2', 
+      aspect: 'aspect-[16/9]' 
+    },
+  ];
+
+  const certificates = [
+    { src: '/images/react.png', alt: 'Certificate 1' },
+    { src: '/images/dasar.png', alt: 'Certificate 2' },
+    { src: '/images/react.png', alt: 'Certificate 3' },
   ];
 
   return (
@@ -125,82 +163,92 @@ export default function Hero() {
       <section id="projects" className="bg-black py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-white text-4xl font-bold mb-8 text-center md:text-left">Featured Projects</h2>
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  {[
-    { src: '/images/website-perpus.png', alt: 'Project 1', span: 'sm:col-span-2 lg:col-span-2', aspect: 'aspect-[16/9]' },
-    { src: '/images/lp.png', alt: 'Project 2', aspect: 'aspect-[4/3]' },
-    { src: '/images/nime2.png', alt: 'Project 3', span: 'sm:col-span-2', aspect: 'aspect-[16/9]' },
-    { src: '/images/lp.png', alt: 'Project 4', aspect: 'aspect-[4/3]' },
-  ].map(({ src, alt, span = '', aspect }) => {
-    const isFourThree = aspect === 'aspect-[4/3]'; // cek apakah 4:3
-    return (
-     <a key={src} href={src} target="_blank" rel="noopener noreferrer" className={`relative group ${span}`}>
-  <div className={`overflow-hidden ${aspect} rounded-lg`}>
-    <Image 
-      src={src} 
-      alt={alt} 
-      fill 
-      className={`object-cover transition-transform duration-300 group-hover:scale-105 ${isFourThree ? 'object-top' : 'object-center'}`}
-      sizes="(max-width: 1024px) 100vw, 33vw"
-      loading="lazy"
-    />
-  </div>
-  <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-    <span className="text-white text-lg font-semibold">View Project</span>
-  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map(({ src, alt, span = '', aspect, live, github }) => {
+              const isFourThree = aspect === 'aspect-[4/3]';
+              return (
+                <div key={src} className={`relative group ${span}`}>
+                  <div className={`overflow-hidden ${aspect} rounded-lg`}>
+                    <Image 
+                      src={src} 
+                      alt={alt} 
+                      fill 
+                      className={`object-cover transition-transform duration-300 group-hover:scale-105 ${isFourThree ? 'object-top' : 'object-center'}`}
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/40 rounded-lg flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 gap-2 pointer-events-auto">
+                 <a 
+  href={live} 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full font-medium text-sm hover:bg-gray-200 transition"
+>
+  <BiLinkExternal className="w-5 h-5"/> Live Demo
 </a>
-    )
-  })}
-</div>
+
+                    <a 
+  href={github} 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-full font-medium text-sm hover:opacity-90 transition"
+>
+  <FaGithub className="w-5 h-5"/> View Code
+</a>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-           <section id="certificate" className="bg-black py-4 px-4">
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-white text-4xl font-bold mb-12 text-center md:text-left">
-      Certificate
-    </h2>
+      {/* ===== CERTIFICATE SECTION ===== */}
+      <section id="certificate" className="bg-black py-4 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-white text-4xl font-bold mb-12 text-center md:text-left">Certificate</h2>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[
-        { src: '/images/react.png', alt: 'Certificate 1' },
-        { src: '/images/dasar.png', alt: 'Certificate 2' },
-        { src: '/images/react.png', alt: 'Certificate 3' },
-      ].map(({ src, alt }) => (
-        <a key={src} href={src} target="_blank" rel="noopener noreferrer" className="relative group">
-          <Image
-            src={src}
-            alt={alt}
-            width={600}
-            height={400}
-            className="rounded-lg w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-lg font-semibold">View Certificate</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {certificates.map(({ src, alt }) => (
+              <a key={src} href={src} target="_blank" rel="noopener noreferrer" className="relative group">
+                <Image
+                  src={src}
+                  alt={alt}
+                  width={600}
+                  height={400}
+                  className="rounded-lg w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-lg font-semibold">View Certificate</span>
+                </div>
+              </a>
+            ))}
           </div>
-        </a>
-      ))}
-    </div>
-  </div>
-</section>
-
-
+        </div>
+      </section>
 
       {/* ===== SKILLS SECTION ===== */}
       <section id="skills" className="bg-black py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-white text-4xl font-bold mb-8 text-center md:text-left">Skills</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {skills.map(skill => (
-              <div key={skill.name} className="bg-white/5 p-4 rounded-lg flex flex-col items-center text-center hover:bg-white/10 transition">
-                <span className="text-white font-medium">{skill.name}</span>
-                <span className="text-gray-400 text-sm mt-1">{skill.level}</span>
-              </div>
-            ))}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+        {skills.map((skill, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md hover:scale-105 transition-transform"
+          >
+            <div className="text-6xl mb-2">{skill.icon}</div>
+            <span className="text-sm sm:text-base text-gray-300">{skill.name}</span>
           </div>
+        ))}
+      </div>
         </div>
       </section>
+
     </div>
   );
 }
