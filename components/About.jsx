@@ -42,8 +42,11 @@ function About() {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+  console.log("submit jalan");
 
   try {
+ 
+
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: {
@@ -52,12 +55,11 @@ function About() {
       body: JSON.stringify(formData),
     });
 
-    if (res.ok) {
-      setSubmitted(true);
-      setFormData({ name: "", email: "", message: "" });
-    }
+    console.log("status:", res.status);
+
+    setSubmitted(true);
   } catch (err) {
-    console.error(err);
+    console.error("error:", err);
   }
 };
 
@@ -221,7 +223,7 @@ function About() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="p-3 rounded-lg bg-black/30 text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="p-3 rounded-lg bg-black/30 text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white"
             />
             <textarea
               name="message"
@@ -229,7 +231,7 @@ function About() {
               value={formData.message}
               onChange={handleChange}
               required
-              className="p-3 rounded-lg bg-black/30 text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-green-400 resize-none h-32"
+              className="p-3 rounded-lg bg-black/30 text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white resize-none h-32"
             ></textarea>
             <button
               type="submit"
