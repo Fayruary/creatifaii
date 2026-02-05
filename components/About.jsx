@@ -143,7 +143,7 @@ function About() {
                hover:bg-white/10 transition"
   >
     <FaXTwitter className="w-4 h-4 text-white/80" />
-    <span className="text-xs text-white/80 font-medium">X</span>
+    <span className="text-xs text-white/80 font-medium">Twitter</span>
   </a>
 
   <a
@@ -234,11 +234,12 @@ function About() {
               className="p-3 rounded-lg bg-black/30 text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white resize-none h-32"
             ></textarea>
             <button
-              type="submit"
-              className="mt-2 bg-white hover:bg-gray-200 text-black font-semibold px-6 py-3 rounded-full transition"
-            >
-              Send Message
-            </button>
+  type="submit"
+  className="mt-2 bg-white hover:bg-gray-200 text-black font-semibold px-6 py-3 rounded-full transition transform active:scale-95"
+>
+  Send Message
+</button>
+
             {submitted && <p className="text-green-400 mt-2">Message sent! Thank you.</p>}
 
           </form>
