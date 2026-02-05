@@ -212,7 +212,7 @@ function About() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="p-3 rounded-lg bg-black/30 text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="p-3 rounded-lg bg-black/30 text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white"
             />
             <input
               type="email"
